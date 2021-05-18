@@ -1,0 +1,11 @@
+pipeline {
+    agent any
+    stages {
+        stage("hello-docker") {
+            steps {
+                sh 'docker -v'
+                sh 'docker-compose -v'
+            }
+        }
+    }
+}

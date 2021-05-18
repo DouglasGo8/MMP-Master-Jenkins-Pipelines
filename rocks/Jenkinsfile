@@ -1,0 +1,10 @@
+pipeline {
+    agent any
+    stages {
+        stage("hello-build") {
+            steps {
+                echo "Jenkins Rocks!!!"
+            }
+        }
+    }
+}

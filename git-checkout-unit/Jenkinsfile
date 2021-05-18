@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    tools {
+        maven 'MAVEN_DEF'
+    }
+    stages {
+        stage('checkout') {
+            steps {
+                git branch: 'master',
+                    // credentialsId: 'credentials',
+                    url: 'https://github.com/DouglasGo8/MMP-Camel-JenkinsGit.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn -DskipTests compile'
+            }
+        }
+        stage('unit-test') {
+            steps {
+                sh 'mvn compile camel:run'
+            }
+        }
+    }
+}

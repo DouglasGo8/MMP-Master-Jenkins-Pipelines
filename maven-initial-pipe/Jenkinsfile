@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+    tools {
+        maven 'MAVEN_DEF'
+    }
+    stages {
+        stage("hello-build") {
+            steps {
+                sh 'mvn -v'
+                sh 'mvn help:effective-settings'
+            }
+        }
+    }
+}

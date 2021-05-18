@@ -1,0 +1,11 @@
+pipeline {
+    agent any
+    stages {
+        stage("hello-world-ansible") {
+            steps {
+              sh 'ansible --version'
+              sh 'ansible-playbook -e "MSG=\'${arg0}\'" /var/playbooks/ansible/play.yml'
+            }
+        }
+    }
+}

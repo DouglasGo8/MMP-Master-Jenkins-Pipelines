@@ -1,0 +1,14 @@
+version: '3.0'
+services:
+ jenkins:
+  container_name: jenkins
+  image: jenkins:jenkins:lts
+  volumes:
+   - "~/.jenkins/home:/var/jenkins_home"
+   - "~/.m2/local/repo:/var/.m2/local/repo"
+  ports:
+   - "15666:8080"
+  networks:
+   - net
+networks:
+ net:
