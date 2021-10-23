@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    tools {
+        maven 'MAVEN_DEF'
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'master',
+                    // credentialsId: 'credentials',
+                    url: 'https://github.com/DouglasGo8/mp-camel-spring-boot-jenkins-pipeline.git'
+            }
+        }
+        stage ('Unit Test') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+        stage ('Unit Test') {
+            steps {
+                sh 'mvn clean test'
+            }
+        }
+    }
+}

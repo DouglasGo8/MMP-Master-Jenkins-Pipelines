@@ -93,7 +93,7 @@ pipeline {
    }
    stages {
       stage ('Example') {
-         environment { NAME = 'Rafal'}
+         environment { NAME = 'Douglas Db'}
          when { expression { return params.DEBUG_BUILD}}
          steps {
             echo 'Hello from $NAME'
@@ -117,9 +117,9 @@ pipeline {
 2. Execute automatically every minute
 3. Stop if the execution takes
 4. Ask for boolean input parameter before starting
-5. Set Rafal as the environment variable NAME.
+5. Set Douglas Db as the environment variable NAME.
 6. Only in the case of the true input parameter
-   - Print Hello from Rafal
+   - Print Hello from Douglas Db
    - Print Testing the chrome browser
    - Print Testing the firefox browser
 7. Print I will always say Hello again, no matter if there are any errors during the executions
@@ -133,20 +133,30 @@ pipeline {
 ## Directives
 
 > - **Agent**: This specifies where the execution takes place and can define the
-label to match the equally labeled agents or docker to specify a container that
-is dynamically provisioned to provide an environment for the pipeline
-execution
+>   label to match the equally labeled agents or docker to specify a container that
+>   is dynamically provisioned to provide an environment for the pipeline
+>   execution
 > - **Triggers**: This defines automated ways to trigger the pipeline and can use
-cron to set the time-based scheduling or pollScm to check the repository for
-changes (we will cover this in detail in the Triggers and notifications
-section)
+>   cron to set the time-based scheduling or pollScm to check the repository for
+>   changes (we will cover this in detail in the Triggers and notifications
+>   section)
 > - **Options**: This specifies pipeline-specific options, for example, timeout
-(maximum time of pipeline run) or retry (number of times the pipeline
-should be rerun after failure)
+>   (maximum time of pipeline run) or retry (number of times the pipeline
+>   should be rerun after failure)
 > - **Environment**: This defines a set of key values used as environment
-variables during the build
+>   variables during the build
 > - **Parameters**: This defines a list of user-input parameters
 > - **Stage**: This allows for logical grouping of steps
 > - **When**: This determines whether the stage should be executed depending on
-the given condition
+>   the given condition
 > - **Complete List** [link](https://www.jenkins.io/doc/pipeline/steps/)
+
+## Strategies
+
+- **Trunk-based workflow:** implies constantly struggling against the broken pipeline. If everyone commits to the main codebase, then the pipeline often fails. In this case, the old Continuous Integration rule says, "If the build is broken, then the development team stops whatever they are doing and fixes the problem immediately
+- **Branching workflow:** solves the broken trunk issue but introduces another one: if everyone develops in their own branches, then where is the integration? A feature usually takes weeks or months to develop, and for all this time, the branch is not integrated into the main code, therefore it cannot be really called "continuous" integration; not to mention that there is a constant need for merging and resolving conflicts.
+- **Forking workflow:** implies managing the Continuous Integration process by every repository owner, which isn't usually a problem. It shares however, the same issues as the branching workflow
+- **Application configuration:** This involves software properties that decide how the system works, which are usually expressed in the form of flags or properties files passed to the application, for example, the database address, the maximum chunk size for file processing, or the logging level. They can be applied during different development phases: build, package, deploy, or
+run.
+- **Infrastructure configuration:** This involves server infrastructure and environment configuration, which takes care of the deployment process. It defines what dependencies should be installed on each server and specifies the way applications are orchestrated (which application is run on which
+server and in how many instances)

@@ -4,7 +4,7 @@ pipeline {
         maven 'MAVEN_DEF'
     }
     stages {
-        stage('checkout') {
+        stage('Checkout') {
             steps {
                 git branch: 'master',
                     // credentialsId: 'credentials',
@@ -19,6 +19,16 @@ pipeline {
         stage('unit-test') {
             steps {
                 sh 'mvn compile camel:run'
+            }
+        }
+        stage ('docker build') {
+            steps {
+                sh 'docker build -t app .'
+            }
+        }
+        stage ('docker push') {
+            steps {
+                sh 'docker push douglasdb/app:latest'
             }
         }
     }
